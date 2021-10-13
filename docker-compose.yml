@@ -1,0 +1,8 @@
+version: '3'
+services:
+    python_uoc:
+        build:
+            context: ./
+            dockerfile: .docker/Dockerfile
+        volumes:
+            - .:/usr/src/app

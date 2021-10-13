@@ -1,13 +1,10 @@
 # Práctica 1: Topología y ciclo de vida de los datos
 Webscraper a la web de pisos.com
+
 ## Funcionamiento del entorno virtual
-Para arrancar el entorno virtual, abrir una terminal y ejecutar el siguiente comando:
+Para arrancar el proyecto:
 ```bash
-source environment/bin/activate
-```
-Para parar el entorno virtual, dentro del entorno, ejecutar
-```bash
-deactivate
+docker-compose up
 ```
 ## Ejecutar el scraper
 Desde una terminal, lanzar el comando.
