@@ -173,3 +173,23 @@ curl 'https://www.idealista.com/ajax/calculate-savings-form?buyingPrice=353000&g
   --compressed
   ```
 
+Mapa completo de mallorca:
+![img.png](img.png)
+
+```
+curl 'https://api.pisos.com/v5//search/mapbyarea?excludePropertyIdFromSearch=&busqueda=0.1000.F002.C00000000000201.0.0X0.0.0.0X0.0.0X0X0.1.0.0X0.0X0.0&coordinates=3.7984145814064334:40.050394363056654|2.0639480286725984:39.178690932761526&zoom=9&searchSerializedToSaveSearch=0.1000.F002.C00000000000201.0.0X0.0.0.0X0.0.0X0X0.1.0.0X0.0X0.0&cu=es&apikey=732df30bad6bb3916e9a1c2a5d46377b' \
+  -H 'authority: api.pisos.com' \
+  -H 'sec-ch-ua: "Chromium";v="94", "Google Chrome";v="94", ";Not A Brand";v="99"' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'origin: https://www.pisos.com' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'referer: https://www.pisos.com/mapa/venta/pisos-isla_de_mallorca/' \
+  -H 'accept-language: en-GB,en;q=0.9,es-ES;q=0.8,es;q=0.7,en-US;q=0.6,ca;q=0.5,lt;q=0.4' \
+  -H 'cookie: s_ecid=MCMID%7C63987960052095364043921952337018889833; didomi_token=eyJ1c2VyX2lkIjoiMTdiOGQ5ODAtZTM1MC02NTk5LWE2YjItNjY2NmM4MzNmNDQyIiwiY3JlYXRlZCI6IjIwMjEtMDgtMjhUMTY6Mjk6MjUuOTE0WiIsInVwZGF0ZWQiOiIyMDIxLTA4LTI4VDE2OjI5OjI1LjkxNFoiLCJ2ZW5kb3JzIjp7ImVuYWJsZWQiOlsidHdpdHRlciIsImdvb2dsZSIsImM6YWRvYmUtdGFnbWFuYWdlciIsImM6c2VudHJ5IiwiYzpxdWFsaWZpby1XQTdXbkhCaSIsImM6c2FsZXNmb3JjZS1FNmhRblpCMiIsImM6ZG9ndHJhY2stZWNwbXBwMk0iLCJjOmhvdGphciIsImM6aW5zdGFncmFtIiwiYzpvbW5pdHVyZS1hZG9iZS1hbmFseXRpY3MiLCJjOmNoYXJ0YmVhdCIsImM6bmV3LXJlbGljIiwiYzpnaWd5YS1jb3VudGVyIiwiYzpnaWd5YSIsImM6bHVja3ktb3JhbmdlIiwiYzppbmRpZ2l0YWxsLVAzRjRpZlc0IiwiYzprZWVzaW5nLThmVEhyVUFnIiwiYzp2aWx5bngtTjNZSjlaSlgiLCJjOmJsdWVrbm93LThkZ0NHNktKIiwiYzpjb25uZWN0aWYtN2dKYUNHdzIiLCJjOjR3LW1hcmtldHBsYWNlIl19LCJwdXJwb3NlcyI6eyJlbmFibGVkIjpbImRhdGFfc2hhcmluZyIsImdlb2xvY2F0aW9uX2RhdGEiLCJkZXZpY2VfY2hhcmFjdGVyaXN0aWNzIl19LCJ2ZW5kb3JzX2xpIjp7ImVuYWJsZWQiOlsiZ29vZ2xlIl19LCJ2ZXJzaW9uIjoyLCJhYyI6IkFGbUFDQUZrLkFBQUEifQ==; euconsent-v2=CPLp-v7PLp-v7AHABBENBoCsAP_AAH_AAAAAHkNf_X9fb2vj-_59d_t0eY1P9_63t-wzjheNs-8NyZ_X_J8X42MyvB34pqYKmR4EunLBAQdlHGHcTQgAwIkVqTPsYk2MjzNKJ7JEmlMbO2dYGH9vn8XTuZKY70-8___zv3-v_v__7qAAAAAgBAAAAAgAAIABAAAAAAAEDiwCTDUvIAGxLHAk2jSqFECMKwkKgFABRQDC0TWEBI4KdkcBHqCBAAhMQEIEQIMQUQMAgAEAgCQiIAQA4EAiAIgEAAIARICEABEgCCwAsDAIABQDQsAIoAhAkIMDgqOUwICJFooJ5AAAAAAQAgAAAAAAAEAA.f_gAD_gAAAAA; __gads=ID=638b2de19fab49b6:T=1630168174:S=ALNI_MakfbSMMMtQkDkEwE4SxXQhHMU23w; _hjid=f41b80d0-07e2-4699-8326-0442b0154ccf; _jsuid=1721156721; showHelpDrawPoligon=false; _ga_7N4KR6VRNY=GS1.1.1630743966.6.1.1630743967.0; CustomSessionId=de8629dbeb8b4d188a3ad27f025902e3; NombreOrigenSesion=Indeterminado; NombreOrigenMarketing=Indeterminado; AMCVS_9854C13E58403FEB0A495D53%40AdobeOrg=1; AMCV_9854C13E58403FEB0A495D53%40AdobeOrg=-2121179033%7CMCIDTS%7C18919%7CMCMID%7C63987960052095364043921952337018889833%7CMCAAMLH-1635186576%7C6%7CMCAAMB-1635186576%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCOPTOUT-1634588976s%7CNONE%7CMCAID%7CNONE%7CvVersion%7C5.3.0; _gid=GA1.2.428404761.1634581778; s_cc=true; UltimoEspecialista=24702; _UltimaBusqueda=0.1000.F002.C00000000000201.0.0X0.0.0.0X0.0.0X0X0.1.0.0X0.0X0.0; UltimaUrlParrilla=https://www.pisos.com/venta/pisos-isla_de_mallorca/; s_ppn=venta%3Apisos-isla-de-mallorca%3Apisos-en-isla-de-mallorca-islas-baleares-illes-balears-pisos-com; cto_bundle=KPp6IV9NRmNrcHRidUI1cmkzUDlObmE5OG52RlhLM2g5aCUyRm9DM0VvUnZLQiUyQnQ1b3NhdnF4YTVuZ1VCVHlEdGprdVhFVks1NEs2c1F5TThEWXpxZkgybGc1SzNGOW5MVlFoSXcxT29jRTgzTm1rc05uRU16clRucHlWQ0VaSEpycTZqWG9RU3F6dG5OUzRXU3pLQ1NtUGM4a3BBJTNEJTNE; s_ppvl=venta%253Apisos-isla-de-mallorca%253Apisos-en-isla-de-mallorca-islas-baleares-illes-balears-pisos-com%2C9%2C9%2C969%2C1920%2C969%2C1920%2C1080%2C1%2CP; s_ppv=venta%253Apisos-isla-de-mallorca%253Apisos-en-isla-de-mallorca-islas-baleares-illes-balears-pisos-com%2C17%2C9%2C1827%2C1920%2C969%2C1920%2C1080%2C1%2CP; s_nr=1634582405536-New; cookieNavegacionPortal=https://~/mapa/$vn/pisos-isla_de_mallorca/*https://~/mapa/$vn/pisos-isla_de_mallorca/*https://~/$vv/isla_de_mallorca/*https://~/$vv/islas_baleares_illes_balears/*https://~/; _ga=GA1.1.1542726223.1630168158; _ga_DETRV66PDP=GS1.1.1634581775.1.1.1634582557.0' \
+  --compressed
+```

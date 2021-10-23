@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 from scrapy.crawler import CrawlerProcess
 
-from Parsers.DetalleParser import DetalleParser
+#from Parsers.DetalleParser import DetalleParser
+from Parsers.PSPParser import PSPParser
+from Parsers.SearchResultsParser import SearchResultsParser
+
+#TODO Borrar código sobrante e importaciones innecesarias.
 
 def main():
 
     process = CrawlerProcess()
-    process.crawl(DetalleParser)
+    process.crawl(SearchResultsParser)
     process.start()
 
 if __name__ == "__main__":
