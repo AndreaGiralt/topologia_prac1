@@ -12,3 +12,13 @@ class Database ():
 
     def insertID(self,id):
         result = self.db.ids.insert_one({"id":id})
+
+    def getIDs (self):
+
+        result = self.db.ids.distinct("id")
+
+        # Se puede llamar a la API de 25 en 25.
+        chunks = 25
+
+        output = ["|".join(result[i:i + chunks]) for i in range(0, len(result), chunks)]
+        print(output)
