@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
 from scrapy.crawler import CrawlerProcess
 
-#from Parsers.DetalleParser import DetalleParser
+from Parsers.DetalleParser import DetalleParser
 from Parsers.PSPParser import PSPParser
 from Parsers.SearchResultsParser import SearchResultsParser
+from Parsers.ZonasParser import ZonasParser
 
 #TODO Borrar código sobrante e importaciones innecesarias.
+#TODO Realizar la importación dependiendo de lo que llega de linea de comandos.
+#TODO crear un makefile que haga las diferentes tareaas que hace el crawler
+#TODO Organizar el código (Hay código repetido)
+#TODO Meter en el trello todos los TODOs que se han hecho.
+
 
 def main():
 
     process = CrawlerProcess()
-    process.crawl(SearchResultsParser)
+    process.crawl(ZonasParser)
+    #process.crawl(SearchResultsParser)
+    #process.crawl(DetalleParser)
     process.start()
 
 if __name__ == "__main__":

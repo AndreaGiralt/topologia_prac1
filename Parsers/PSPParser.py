@@ -43,6 +43,7 @@ class PSPParser (scrapy.Spider):
         )
 
     def parse_response(self, response, **kwargs):
+
         dataJson = json.loads(response.text)
 
         header = ['id']

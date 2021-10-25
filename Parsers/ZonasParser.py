@@ -1,11 +1,11 @@
-import scrapy, datetime, json
+import scrapy, csv, json
 
 from lib.Database import Database
 
 
-class DetalleParser(scrapy.Spider):
+class ZonasParser(scrapy.Spider):
 
-    base_url = "https://api.pisos.com/"
+    base_url = "https://www.pisos.com/"
     name = "Scraper"
     db = None
 
@@ -35,7 +35,7 @@ class DetalleParser(scrapy.Spider):
         ids = self.db.getFormatedIDs()
 
         for id in ids:
-            detail_url = self.base_url + "/v5//detail/properties/previews?ids="+id+"&cu=es&apikey=732df30bad6bb3916e9a1c2a5d46377b"
+            detail_url = self.base_url + "/viviendas/isla_de_mallorca/"
             yield scrapy.Request(
                 url=detail_url,
                 headers=self.headers,
@@ -44,5 +44,23 @@ class DetalleParser(scrapy.Spider):
 
     def parse_response(self, response, **kwargs):
 
-        data_json = json.loads(response.text)
-        self.db.insertDocuments(data_json)
+        selectors = response.css(".item-subitem")
+
+        with open("data/zonas.csv", "w") as file:
+
+            csv_file = csv.writer(file)
+            csv_file.writerow(['zone','total'])
+
+            for selector in selectors:
+                href = selector.attrib['href']
+                total = selector.css(".total::text").extract()[0] #cogemos los totales.
+                csv_file.writerow([href,total.strip("()")])
+
+
+
+
+
+
+
+
+
