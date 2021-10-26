@@ -29,9 +29,6 @@ class PSPParser (scrapy.Spider):
 
     def start_requests(self):
 
-        #TODO: Cuadrícula con Mallorca.
-
-
         coordinates = '3.7984145814064334:40.050394363056654|2.0639480286725984:39.178690932761526'
         zoom = str(9)
 

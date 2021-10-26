@@ -1,9 +1,9 @@
-import scrapy, json, csv
+import scrapy, json, csv, math
 from lib.Database import Database
 
 class SearchResultsParser (scrapy.Spider):
 
-    base_url = "https://pisos.com/"
+    base_url = "https://pisos.com"
     name = "Scraper"
     db = None
 
@@ -31,30 +31,37 @@ class SearchResultsParser (scrapy.Spider):
 
     def start_requests(self):
 
-        #TODO coger los totales, para calcular el número de páginas.
-        #TODO Handle exceptions.
-
         self.db = Database()
 
-        #TODO tiene un máximo de 100, hay que hacerlo por localidad o mapa
-        for i in range(1,50):
+        with open("data/zonas.csv") as file:
 
-            request_id_string = ''
+            csv_reader = csv.reader(file)
+            next(csv_reader, None) #Remove headers.
 
-            if i > 1:
-                request_id_string = str(i)
+            for row in csv_reader:
+                print ("Processing: " + row[0] )
 
-            detail_url = self.base_url + '/venta/pisos-isla_de_mallorca/'+request_id_string
+                total_pages = math.ceil(int(row[1])/30);
 
-            yield scrapy.Request(
-                url=detail_url,
-                headers=self.headers,
-                callback=self.parse_response,
-                meta = {
-                    'page': i
-                }
-            )
+                for i in range(1,total_pages):
 
+                    print("Page: " + str(i))
+
+                    request_id_string = ''
+
+                    if i > 1:
+                        request_id_string = str(i)
+
+                    detail_url = self.base_url + row[0] + request_id_string
+
+                    yield scrapy.Request(
+                        url=detail_url,
+                        headers=self.headers,
+                        callback=self.parse_response,
+                        meta = {
+                            'page': i
+                        }
+                    )
 
     def parse_response(self, response, **kwargs):
 
@@ -63,4 +70,3 @@ class SearchResultsParser (scrapy.Spider):
         for selector in selectors:
             id = selector.attrib['id']
             self.db.insertID(id)
-
