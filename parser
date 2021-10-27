@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
+import argparse
 from scrapy.crawler import CrawlerProcess
-
 from Parsers.DetalleParser import DetalleParser
 from Parsers.PSPParser import PSPParser
 from Parsers.SearchResultsParser import SearchResultsParser
@@ -8,11 +8,35 @@ from Parsers.ZonasParser import ZonasParser
 
 def main():
 
-    process = CrawlerProcess()
-    #process.crawl(ZonasParser)
-    #process.crawl(SearchResultsParser)
-    process.crawl(DetalleParser)
-    process.start()
+    parser = argparse.ArgumentParser(prog="parser",description='Scraper de la web pisos.com (Mallorca)')
+    parser.add_argument('-z','--zones', help='Importa las zonas de Mallorca.', action="store_true")
+    parser.add_argument('-i','--ids', help='Importa los ids de los anuncios.', action="store_true")
+    parser.add_argument('-d','--details',help='Importa los detalles de los anuncios.', action="store_true")
+    parser.add_argument('-c','--csv', help='Crea un csv con los resultados.',action="store_true")
+
+    args = parser.parse_args()
+
+    if not any(vars(args).values()):
+        parser.error('Es necesario indicar como mínimo una acción')
+
+    if args.zones or args.ids or args.details:
+
+        process = CrawlerProcess()
+
+        if args.zones:
+            print("Importando zonas...")
+            #process.crawl(ZonasParser)
+        if args.ids:
+            print("Importando ids...")
+            #process.crawl(SearchResultsParser)
+        if args.details:
+            print("Importando detalles...")
+            #process.crawl(SearchResultsParser)
+
+        process.start()
+
+    elif args.csv:
+        print("Creando csv...")
 
 if __name__ == "__main__":
     main()
