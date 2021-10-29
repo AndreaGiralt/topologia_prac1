@@ -36,6 +36,5 @@ class Database ():
 
     def getRealStates(self):
 
-        result = self.db.details.find({})
-
+        result = self.collection.find({})
         return result

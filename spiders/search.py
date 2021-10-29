@@ -43,8 +43,8 @@ class SearchSpider (scrapy.Spider):
                         }
                     )
 
-                    break
-                break
+                    #break #Test only one call
+                #break #Test only one call
 
     def parse_response(self, response, **kwargs):
 

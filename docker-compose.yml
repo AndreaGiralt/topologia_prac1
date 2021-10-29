@@ -12,6 +12,8 @@ services:
             - mongo_uoc
     mongo_uoc:
         image: "mongo"
+        volumes:
+            - ./dump:/dump
         ports:
             -   "27999:27017"
         command: mongod

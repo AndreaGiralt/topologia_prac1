@@ -20,25 +20,25 @@ def main():
     if not any(vars(args).values()):
         parser.error('Es necesario indicar como mínimo una acción')
 
-    if args.zones or args.previews or args.details:
+    if args.all or args.zones or args.previews or args.details:
 
         process = CrawlerProcess()
 
-        if args.zones or args.all:
+        if args.all or args.zones:
             print("Importando zonas...")
             process.crawl(ZonesSpider)
 
-        if args.previews or args.all:
+        if args.all or args.previews:
             print("Importando previsualizaciones...")
             process.crawl(SearchSpider)
 
-        if args.details or args.all:
+        if args.all or args.details:
             print("Importando detalles...")
             process.crawl(DetailSpider)
 
         process.start()
 
-    elif args.csv:
+    if args.all or args.csv:
         print("Creando csv...")
         create_csv()
 

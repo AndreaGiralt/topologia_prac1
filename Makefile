@@ -1,44 +1,29 @@
 .DEFAULT_GOAL := help
-.PHONY: local image composer migrate database pgbadger start stop remove help
+.PHONY: local database start stop remove help console spider zones previews details csv
 
-local: image
-	docker volume create mongo-is
-	docker volume create postgresql-is
-	docker network create cms || true
-	docker network create traefik || true
+local:
 	docker-compose up -d
 
-image:
-	docker build -f apache/Dockerfile ../../ --tag ecommerce-is/apache:local
-	docker build -f php/Dockerfile ../../ --tag ecommerce-is/php:local
-	docker build -f scss/Dockerfile ../../ --tag ecommerce-is/scss:local
-	docker build -f mongo/Dockerfile ../../ --tag ecommerce-is/mongo:local
-	docker build -f postgresql/Dockerfile ../../ --tag ecommerce-is/postgresql:local
-	docker build -f php/Dockerfile-cron ../../ --tag ecommerce-is/cron:local
+console:
+	docker-compose exec python_uoc bash
 
-composer:
-	docker-compose exec php-is composer update --working-dir=/var/www/islas4/is/composer/iceland
-	docker-compose exec php-is composer update --working-dir=/var/www/islas4/is/composer/iceland
+spider:
+	docker-compose exec -w "/usr/src/app" python_uoc ./parser -a
 
-migrate:
-	docker-compose exec -w "/var/www/islas4/is/core_src/Scripts/migrations" php-is ./migrate.php islas4dev-is.deswebislas.com migrations:migrate
+zones:
+	docker-compose exec -w "/usr/src/app" python_uoc ./parser -z
 
-migration_generate:
-	docker-compose exec -w "/var/www/islas4/is/core_src/Scripts/migrations" php-is ./migrate.php islas4dev-is.deswebislas.com migrations:generate
+previews:
+	docker-compose exec -w "/usr/src/app" python_uoc ./parser -p
 
-nav_items:
-	docker-compose exec -w "/var/www/islas4/is/baltics_src/core_src/Scripts/Iceland/Navision" php-is ./importFullConcurrently.php islas4dev-is.deswebislas.com reimport
+details:
+	docker-compose exec -w "/usr/src/app" python_uoc ./parser -d
 
-nav_prices:
-	docker-compose exec -w "/var/www/islas4/is/baltics_src/core_src/Scripts/Iceland/Navision" php-is ./importFullConcurrently.php islas4dev-is.deswebislas.com update
-
+csv:
+	docker-compose exec -w "/usr/src/app" python_uoc ./parser -c
 
 database:
-	docker-compose exec postgresql-is ash /docker-entrypoint-initdb.d/init_docker_postgres.sh
-
-pgbadger:
-	docker cp iceland_postgresql-is_1:/logs/postgresql.log .
-	cat postgresql.log | docker run -i --rm matsuu/pgbadger --prefix='%t [%p]: [%l-1] db=%d,user=%u' - -o - -x html > report.html
+	docker-compose exec -w "/" mongo_uoc mongodump -d uoc --collection real_states
 
 start:
 	docker-compose start
@@ -51,18 +36,14 @@ remove:
 
 help:
 	@echo "🚀 local : build and launch local environment"
-	@echo "🖼️ image : build local images"
-	@echo "🎵 composer : install composer packages"
-	@echo "🗂️ database : dump development database to local"
-	@echo "🦡 pgbadger : create report from local PostgreSQL"
-	@echo "🔁 nav_items : import the items from Navision"
-	@echo "🔄 nav_prices : update the prices from Navision"
-	@echo "♻ migrate : execute the project's migrations"
+	@echo "🚀 console : open a python console"
+	@echo "🚀 spider: runs the complete spider"
+	@echo "🚀 zones: runs zones spider"
+	@echo "🚀 previews: runs previews spider"
+	@echo "🚀 details: runs details spider"
+	@echo "🗂️ csv: dump into csv"
+	@echo "🗂️ database : dump database"
 	@echo "🏁 start : starts environment"
 	@echo "🛑 stop : stops environment"
 	@echo "🗑️ remove : remove all containers"
 
-
-
-#mongodump -d real_states --port 27999 --collection ids
-#mongodump -d real_states --port 27999 --collection details

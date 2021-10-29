@@ -36,7 +36,7 @@ class DetailSpider(scrapy.Spider):
                 headers=self.headers,
                 callback=self.parse_response
             )
-            break
+            #break #Test only one request
 
     def parse_response(self, response, **kwargs):
 
