@@ -1,4 +1,4 @@
-from lib.Database import Database
+from libs.database import Database
 
 db = Database()
 

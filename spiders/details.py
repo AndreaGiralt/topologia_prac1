@@ -1,15 +1,17 @@
-import scrapy, json, csv
+import scrapy, datetime, json
 
-class PSPParser (scrapy.Spider):
+from libs.database import Database
+
+
+class DetalleParser(scrapy.Spider):
 
     base_url = "https://api.pisos.com/"
     name = "Scraper"
+    db = None
 
     custom_settings = {
         'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
-        'DOWNLOAD_DELAY': 1,
-        'LOG_LEVEL': 'ERROR'
-
+        'DOWNLOAD_DELAY': 1
     }
 
     headers = {
@@ -29,30 +31,18 @@ class PSPParser (scrapy.Spider):
 
     def start_requests(self):
 
-        coordinates = '3.7984145814064334:40.050394363056654|2.0639480286725984:39.178690932761526'
-        zoom = str(9)
+        self.db = Database()
+        ids = self.db.getFormatedIDs()
 
-        detail_url = self.base_url + '/v5//search/mapbyarea?excludePropertyIdFromSearch=&busqueda=0.1000.F002.C00000000000201.0.0X0.0.0.0X0.0.0X0X0.1.0.0X0.0X0.0&coordinates='+coordinates+'&zoom='+zoom+'&searchSerializedToSaveSearch=0.1000.F002.C00000000000201.0.0X0.0.0.0X0.0.0X0X0.1.0.0X0.0X0.0&cu=es&apikey=732df30bad6bb3916e9a1c2a5d46377b'
-        yield scrapy.Request(
-            url=detail_url,
-            headers=self.headers,
-            callback=self.parse_response
-        )
+        for id in ids:
+            detail_url = self.base_url + "/v5//detail/properties/previews?ids="+id+"&cu=es&apikey=732df30bad6bb3916e9a1c2a5d46377b"
+            yield scrapy.Request(
+                url=detail_url,
+                headers=self.headers,
+                callback=self.parse_response
+            )
 
     def parse_response(self, response, **kwargs):
 
-        dataJson = json.loads(response.text)
-
-        header = ['id']
-
-        with open ("data/ids.csv","w") as file:
-            csv_file = csv.writer(file)
-            csv_file.writerow(header)
-
-            print("***************************************")
-            print(len(dataJson['realEstateIds']))
-            print("***************************************")
-
-            for i in dataJson['realEstateIds']:
-                row = str(i)
-                csv_file.writerow([row])
+        data_json = json.loads(response.text)
+        self.db.insertDocuments(data_json)

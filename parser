@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 import argparse
 from scrapy.crawler import CrawlerProcess
-from Parsers.DetalleParser import DetalleParser
-from Parsers.PSPParser import PSPParser
-from Parsers.SearchResultsParser import SearchResultsParser
-from Parsers.ZonasParser import ZonasParser
+from spiders.details import DetalleParser
+from spiders.search import SearchSpider
+from spiders.zones import ZonesSpider
+from libs.csv import create_csv
 
 def main():
 
     parser = argparse.ArgumentParser(prog="parser",description='Scraper de la web pisos.com (Mallorca)')
+    parser.add_argument('-a', '--all', help='Importa todo', action="store_true")
     parser.add_argument('-z','--zones', help='Importa las zonas de Mallorca.', action="store_true")
-    parser.add_argument('-i','--ids', help='Importa los ids de los anuncios.', action="store_true")
+    parser.add_argument('-p','--previews', help='Importa datos básicos de los anuncios', action="store_true")
     parser.add_argument('-d','--details',help='Importa los detalles de los anuncios.', action="store_true")
     parser.add_argument('-c','--csv', help='Crea un csv con los resultados.',action="store_true")
 
@@ -19,24 +20,27 @@ def main():
     if not any(vars(args).values()):
         parser.error('Es necesario indicar como mínimo una acción')
 
-    if args.zones or args.ids or args.details:
+    if args.zones or args.previews or args.details:
 
         process = CrawlerProcess()
 
-        if args.zones:
+        if args.zones or args.all:
             print("Importando zonas...")
-            #process.crawl(ZonasParser)
-        if args.ids:
-            print("Importando ids...")
-            #process.crawl(SearchResultsParser)
-        if args.details:
+            process.crawl(ZonesSpider)
+
+        if args.previews or args.all:
+            print("Importando previsualizaciones...")
+            process.crawl(SearchSpider)
+
+        if args.details or args.all:
             print("Importando detalles...")
-            #process.crawl(SearchResultsParser)
+            process.crawl(DetalleParser)
 
         process.start()
 
     elif args.csv:
         print("Creando csv...")
+        create_csv()
 
 if __name__ == "__main__":
     main()
