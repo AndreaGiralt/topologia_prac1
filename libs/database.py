@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 from scrapy.utils.project import get_project_settings
 
+from items import RealStateItem
+
 class Database ():
 
     collection = None
@@ -18,14 +20,19 @@ class Database ():
 
     def getFormatedIDs (self):
 
-        result = self.db.ids.distinct("id")
+        result = self.collection.distinct("id")
+
         # Se puede llamar a la API de 25 en 25.
         chunks = 25
 
         output = ["|".join(result[i:i + chunks]) for i in range(0, len(result), chunks)]
-
         return output
 
+    def getItem (self,id):
+        result = self.collection.find({"id":id})
+        if result:
+            item = RealStateItem(result[0])
+            return item
 
     def getRealStates(self):
 

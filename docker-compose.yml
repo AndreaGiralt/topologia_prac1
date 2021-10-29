@@ -12,9 +12,6 @@ services:
             - mongo_uoc
     mongo_uoc:
         image: "mongo"
-        #environment:
-            #- MONGO_INITDB_ROOT_USERNAME=admin
-            #- MONGO_INITDB_ROOT_PASSWORD=uocuoc
         ports:
             -   "27999:27017"
         command: mongod

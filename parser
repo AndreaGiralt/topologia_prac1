@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 from scrapy.crawler import CrawlerProcess
-from spiders.details import DetalleParser
+from spiders.details import DetailSpider
 from spiders.search import SearchSpider
 from spiders.zones import ZonesSpider
 from libs.csv import create_csv
@@ -34,7 +34,7 @@ def main():
 
         if args.details or args.all:
             print("Importando detalles...")
-            process.crawl(DetalleParser)
+            process.crawl(DetailSpider)
 
         process.start()
 

@@ -1,18 +1,13 @@
-import scrapy, datetime, json
+import scrapy, json
 
+from items import RealStateItem
 from libs.database import Database
 
-
-class DetalleParser(scrapy.Spider):
+class DetailSpider(scrapy.Spider):
 
     base_url = "https://api.pisos.com/"
-    name = "Scraper"
+    name = "details"
     db = None
-
-    custom_settings = {
-        'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
-        'DOWNLOAD_DELAY': 1
-    }
 
     headers = {
         'authority': 'api.pisos.com',
@@ -41,8 +36,24 @@ class DetalleParser(scrapy.Spider):
                 headers=self.headers,
                 callback=self.parse_response
             )
+            break
 
     def parse_response(self, response, **kwargs):
 
         data_json = json.loads(response.text)
-        self.db.insertDocuments(data_json)
+
+        for data in data_json:
+
+            item = self.db.getItem(data["id"])
+
+            item["url"] = data["url"]
+            item["longitude"] = data["coordinate"]["longitude"]
+            item["latitude"] = data["coordinate"]["latitude"]
+            item["exact_position"] = data["isExactPosition"]
+            item["recently_date"] = data["recentlyDate"]
+            item["is_promo"] = data["idPromotion"]
+            item["image_url"] = data["imageUrl"]
+            item["owner_name"] = data["ownerName"]
+            item["old_price"] = data["pricesLiterals"]["priceOld"]
+
+            self.db.store_item(item)
