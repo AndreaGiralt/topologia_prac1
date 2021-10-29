@@ -13,10 +13,6 @@ class Database ():
         self.collection = db[settings['MONGODB_COLLECTION']]
 
     def store_item(self,item):
-
-        print("insertaaaaa")
-
-        print (item)
         self.collection.update({'id': item['id']}, dict(item), upsert=True)
         return item
 

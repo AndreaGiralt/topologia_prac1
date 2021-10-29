@@ -78,8 +78,8 @@ class SearchSpider (scrapy.Spider):
 
                 m = re.match("([^()]+) \(([^()]+)\)", details[0])
                 if m:
-                    item['zone'] = m.group(0)
-                    item['town'] = m.group(1)
+                    item['zone'] = m.group(1)
+                    item['town'] = m.group(2)
                 else:
                     item['town'] = details[0]
 
