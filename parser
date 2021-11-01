@@ -3,6 +3,7 @@ import argparse
 from scrapy.crawler import CrawlerProcess
 from spiders.details import DetailSpider
 from spiders.search import SearchSpider
+from spiders.unemployment import UnemploymentSpider
 from spiders.zones import ZonesSpider
 from libs.csv import create_csv
 
@@ -13,6 +14,7 @@ def main():
     parser.add_argument('-z','--zones', help='Importa las zonas de Mallorca.', action="store_true")
     parser.add_argument('-p','--previews', help='Importa datos básicos de los anuncios', action="store_true")
     parser.add_argument('-d','--details',help='Importa los detalles de los anuncios.', action="store_true")
+    parser.add_argument('-u', '--unemployment', help='Importa el paro registrado por municipios.', action="store_true")
     parser.add_argument('-c','--csv', help='Crea un csv con los resultados.',action="store_true")
 
     args = parser.parse_args()
@@ -20,7 +22,7 @@ def main():
     if not any(vars(args).values()):
         parser.error('Es necesario indicar como mínimo una acción')
 
-    if args.all or args.zones or args.previews or args.details:
+    if args.all or args.zones or args.previews or args.details or args.unemployment:
 
         process = CrawlerProcess()
 
@@ -35,6 +37,10 @@ def main():
         if args.all or args.details:
             print("Importando detalles...")
             process.crawl(DetailSpider)
+
+        if args.all or args.unemployment:
+            print("Importando información del paro...")
+            process.crawl(UnemploymentSpider)
 
         process.start()
 

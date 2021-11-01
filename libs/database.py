@@ -6,6 +6,7 @@ from items import RealStateItem
 class Database ():
 
     collection = None
+    unEmploymentCollection = None
 
     def __init__(self):
 
@@ -13,6 +14,7 @@ class Database ():
         client = MongoClient(host=settings['MONGODB_SERVER'],port= settings['MONGODB_PORT'])
         db = client[settings['MONGODB_DB']]
         self.collection = db[settings['MONGODB_COLLECTION']]
+        self.unEmploymentCollection = db[settings['MONGODB_UNEMPLOYMENT_COLLECTION']]
 
     def store_item(self,item):
         self.collection.update({'id': item['id']}, dict(item), upsert=True)
@@ -38,3 +40,6 @@ class Database ():
 
         result = self.collection.find({})
         return result
+
+    def storeUnemploymentInfo(self,items):
+        self.unEmploymentCollection.insert_many(items)

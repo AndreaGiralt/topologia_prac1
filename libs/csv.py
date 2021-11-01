@@ -10,8 +10,8 @@ def create_csv():
     db = Database ()
     real_states = db.getRealStates()
 
-    with open("data/real_states.csv","w") as file:
-        csv_file = csv.writer(file)
+    with open("data/real_states.csv","w",encoding='UTF8') as file:
+        csv_file = csv.writer(file,delimiter=";")
         #Writing headers
         csv_file.writerow(['id', 'type','title'
                               ,'description','town','zone','price','surface'
