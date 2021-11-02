@@ -42,4 +42,5 @@ class Database ():
         return result
 
     def storeUnemploymentInfo(self,items):
+        self.unEmploymentCollection.drop()
         self.unEmploymentCollection.insert_many(items)

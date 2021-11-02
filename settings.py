@@ -1,5 +1,5 @@
 BOT_NAME = 'uoc_spider'
-LOG_LEVEL = 'ERROR'
+#LOG_LEVEL = 'ERROR'
 SPIDER_MODULES = ['spiders']
 
 DEFAULT_REQUEST_HEADERS = {

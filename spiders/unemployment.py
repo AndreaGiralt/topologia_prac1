@@ -38,11 +38,12 @@ class UnemploymentSpider(scrapy.Spider):
         if not os.path.exists(dirf):
             os.makedirs(dirf)
 
-        os.chdir(dirf)
-        with open(path, 'wb') as f:
+
+        complete_path =dirf+"/"+path
+        with open(complete_path, 'wb') as f:
             f.write(response.body)
 
-        self.parse_file (path)
+        self.parse_file (complete_path)
 
     def parse_file (self, file_path):
 

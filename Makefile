@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: local dump start stop remove help console spider zones previews details csv
+.PHONY: local dump start stop remove help console spider zones previews details csv unemployment
 
 local:
 	docker-compose up -d
@@ -19,6 +19,9 @@ previews:
 details:
 	docker-compose exec -w "/usr/src/app" python_uoc ./parser -d
 
+unemployment:
+	docker-compose exec -w "/usr/src/app" python_uoc ./parser -u
+
 csv:
 	docker-compose exec -w "/usr/src/app" python_uoc ./parser -c
 
@@ -37,13 +40,14 @@ remove:
 
 help:
 	@echo "🚀 local : build and launch local environment"
-	@echo "🚀 console : open a python console"
-	@echo "🚀 spider: runs the complete spider"
-	@echo "🚀 zones: runs zones spider"
-	@echo "🚀 previews: runs previews spider"
-	@echo "🚀 details: runs details spider"
-	@echo "🗂️ csv: dump into csv"
-	@echo "🗂️ dump : dump database"
+	@echo "🖥️ console : open a python console"
+	@echo "🕷️ spider: runs the complete spider"
+	@echo "🕷️ zones: runs zones spider"
+	@echo "🕷️ previews: runs previews spider"
+	@echo "🕷️ details: runs details spider"
+	@echo "🕷️ unemployment: runs unemployment spider"
+	@echo "💾 csv: dump into csv"
+	@echo "🗂 dump : dump database"
 	@echo "🏁 start : starts environment"
 	@echo "🛑 stop : stops environment"
 	@echo "🗑️ remove : remove all containers"

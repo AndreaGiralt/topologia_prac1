@@ -1,11 +1,36 @@
 #!/usr/bin/env python3
 import argparse
-from scrapy.crawler import CrawlerProcess
 from spiders.details import DetailSpider
 from spiders.search import SearchSpider
 from spiders.unemployment import UnemploymentSpider
 from spiders.zones import ZonesSpider
 from libs.csv import create_csv
+from twisted.internet import reactor, defer
+from scrapy.crawler import CrawlerRunner
+from scrapy.utils.log import configure_logging
+
+
+configure_logging()
+runner = CrawlerRunner()
+
+@defer.inlineCallbacks
+def crawl(args):
+    if args.all or args.zones:
+        print("Importando zonas...")
+        yield runner.crawl(ZonesSpider)
+
+    if args.all or args.previews:
+        print("Importando previsualizaciones...")
+        yield runner.crawl(SearchSpider)
+
+    if args.all or args.details:
+        print("Importando detalles...")
+        yield runner.crawl(DetailSpider)
+
+    if args.all or args.unemployment:
+        print("Importando información del paro...")
+        yield runner.crawl(UnemploymentSpider)
+    reactor.stop()
 
 def main():
 
@@ -23,26 +48,8 @@ def main():
         parser.error('Es necesario indicar como mínimo una acción')
 
     if args.all or args.zones or args.previews or args.details or args.unemployment:
-
-        process = CrawlerProcess()
-
-        if args.all or args.zones:
-            print("Importando zonas...")
-            process.crawl(ZonesSpider)
-
-        if args.all or args.previews:
-            print("Importando previsualizaciones...")
-            process.crawl(SearchSpider)
-
-        if args.all or args.details:
-            print("Importando detalles...")
-            process.crawl(DetailSpider)
-
-        if args.all or args.unemployment:
-            print("Importando información del paro...")
-            process.crawl(UnemploymentSpider)
-
-        process.start()
+        crawl(args)
+        reactor.run()
 
     if args.all or args.csv:
         print("Creando csv...")
