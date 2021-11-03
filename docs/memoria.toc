@@ -1,0 +1,12 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {1}Contexto}{3}{section.1}%
+\contentsline {section}{\numberline {2}Título}{3}{section.2}%
+\contentsline {section}{\numberline {3}Descripción del {\itshape dataset}}{4}{section.3}%
+\contentsline {section}{\numberline {4}Representación gráfica}{4}{section.4}%
+\contentsline {section}{\numberline {5}Contenido}{5}{section.5}%
+\contentsline {section}{\numberline {6}Agradecimientos}{17}{section.6}%
+\contentsline {section}{\numberline {7}Inspiración}{18}{section.7}%
+\contentsline {section}{\numberline {8}Licencia}{18}{section.8}%
+\contentsline {section}{\numberline {9}Código}{19}{section.9}%
+\contentsline {section}{\numberline {10}{\itshape Dataset}}{20}{section.10}%
+\contentsline {section}{Referencias}{21}{section.10}%
