@@ -11,7 +11,7 @@ La actividad ha sido realizada por Andrea Giralt y Manuel Fernandez.
 * [Documento con la memoria de la práctica en pdf](docs/memoria.pdf)
 
 ## Video explicativo
-* [Enlace al video explicativo](docs/presentacion.mp4)
+* [Enlace al video explicativo](https://drive.google.com/file/d/1hQHQwDLWJeYcxgqUthmUtMuxVzqhWgd8/view?usp=sharing)
 
 ## Ejecutar el spider
 Desde una terminal, lanzar el comando.
