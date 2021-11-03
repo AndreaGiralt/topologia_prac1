@@ -7,6 +7,9 @@ Esta práctica se ha realizado bajo el contexto de la asignatura Tipología y ci
 ## Miembros del equipo
 La actividad ha sido realizada por Andrea Giralt y Manuel Fernandez. 
 
+## Documento con las respuestas
+* [Documento con la memoria de la práctica en pdf](docs/memoria.pdf)
+
 ## Ejecutar el spider
 Desde una terminal, lanzar el comando.
 En una terminal compatible con linux (WSL2 o macOS) Para ver los comandos disponibles ejecutamos:
@@ -68,5 +71,3 @@ options:
   -c, --csv           Crea un csv con los resultados.
 ```
 
-## Enlaces de interés
-* [Documento con la memoria de la práctica en pdf](docs/memoria.pdf)
