@@ -2,7 +2,7 @@
 Webscraper a la web de pisos.com
 
 ## Descripción
-Esta práctica se ha realizado bajo el contexto de la asignatura Tipología y ciclo de vida de los datos, perteneciente al Máster en Ciencia de Datos de la Universitat Oberta de Catalunya. En ella, se aplican técnicas de web scraping mediante el lenguaje de programación Python para extraer así datos de la web Pisos.com y generar un dataset.
+Esta práctica se ha realizado bajo el contexto de la asignatura Tipología y ciclo de vida de los datos, perteneciente al Máster en Ciencia de Datos de la Universitat Oberta de Catalunya. En ella, se aplican técnicas de web scraping mediante el lenguaje de programación Python para extraer así datos de las webs Pisos.com y datos.gob.es y generar un dataset.
 
 ## Miembros del equipo
 La actividad ha sido realizada por Andrea Giralt y Manuel Fernandez. 
