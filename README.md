@@ -10,6 +10,9 @@ La actividad ha sido realizada por Andrea Giralt y Manuel Fernandez.
 ## Documento con las respuestas
 * [Documento con la memoria de la práctica en pdf](docs/memoria.pdf)
 
+## Video explicativo
+* [Enlace al video explicativo](docs/presentacion.mp4)
+
 ## Ejecutar el spider
 Desde una terminal, lanzar el comando.
 En una terminal compatible con linux (WSL2 o macOS) Para ver los comandos disponibles ejecutamos:
